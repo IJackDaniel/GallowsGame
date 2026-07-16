@@ -9,7 +9,7 @@ import java.util.Random;
 
 public class GallowsGame {
 
-    private final int COUNT_TRIES = 10;
+    private final int COUNT_ATTEMPTS = 10;
 
     private List<String> words;
     private View gallowsView;
@@ -38,39 +38,39 @@ public class GallowsGame {
             return;
         }
 
-        String word = this.getRandomWord();
-        boolean guess = false;
+        String guessedWord = this.getRandomWord();
+        boolean isGuessed = false;
         boolean isGameFinish = false;
-        int countTries = COUNT_TRIES;
-        int collision = 0;
-
+        int countAttempts = COUNT_ATTEMPTS;
+        int countCollision = 0;
         List<Character> userInput = new ArrayList<>();
-        System.out.println("Отладочный вывод слова: " + word);
+
+        System.out.println("Отладочный вывод слова: " + guessedWord);
+
         do {
-            gallowsView.printCountTries(countTries);
-            gallowsView.showWordWithEEE(word, userInput);
+            gallowsView.printCountAttempts(countAttempts);
+            gallowsView.showWordWithOmissions(guessedWord, userInput);
 
             Character inputCharacter = gallowsView.getUserInput();
             userInput.add(inputCharacter);
 
-            int currentCollision = countCollision(word, userInput);
+            int currentCollision = countCollision(guessedWord, userInput);
 
-            if (currentCollision != collision + 1) {
-                countTries--;
+            if (currentCollision != countCollision + 1) {
+                countAttempts--;
             }
-            collision = currentCollision;
-
-            if (this.checkWin(word, userInput)) {
+            countCollision = currentCollision;
+            if (this.checkWin(guessedWord, userInput)) {
                 isGameFinish = true;
-                guess = true;
+                isGuessed = true;
             }
-            if (countTries <= 0) {
+            if (countAttempts <= 0) {
                 isGameFinish = true;
             }
 
         } while (!isGameFinish);
 
-        gallowsView.printGameResult(guess, word);
+        gallowsView.printGameResult(isGuessed, guessedWord);
 
     }
 

@@ -39,13 +39,12 @@ public class View {
         System.out.println(this.messages.getMessage(key) + word);
     }
 
-    public void printCountTries(int countTries) {
-        System.out.println(this.messages.getMessage("game.message.countTries") + countTries);
+    public void printCountAttempts(int countAttempts) {
+        System.out.println(this.messages.getMessage("game.message.countAttempts") + countAttempts);
     }
 
-    // Переименуй параметры
-    public void showWordWithEEE(String need, List<Character> userInput) {
-        for (char character : need.toCharArray()) {
+    public void showWordWithOmissions(String guessedWord, List<Character> userInput) {
+        for (char character : guessedWord.toCharArray()) {
             if (userInput.contains(character)) {
                 System.out.print(character);
             } else {
