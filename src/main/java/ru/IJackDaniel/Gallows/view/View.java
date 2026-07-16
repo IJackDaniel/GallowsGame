@@ -41,6 +41,7 @@ public class View {
 
     public void printCountAttempts(int countAttempts) {
         System.out.println(this.messages.getMessage("game.message.countAttempts") + countAttempts);
+        // Код для вывода виселицы. Как позитивно)
     }
 
     public void showWordWithOmissions(String guessedWord, List<Character> userInput) {

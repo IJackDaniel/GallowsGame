@@ -11,8 +11,8 @@ public class GallowsGame {
 
     private final int COUNT_ATTEMPTS = 10;
 
-    private List<String> words;
-    private View gallowsView;
+    private final List<String> words;
+    private final View gallowsView;
 
     public GallowsGame(String filePath) {
         gallowsView = new View();
@@ -56,7 +56,7 @@ public class GallowsGame {
 
             int currentCollision = countCollision(guessedWord, userInput);
 
-            if (currentCollision != countCollision + 1) {
+            if (currentCollision <= countCollision) {
                 countAttempts--;
             }
             countCollision = currentCollision;
