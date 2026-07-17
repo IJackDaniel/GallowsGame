@@ -49,7 +49,7 @@ public class View {
             if (userInput.contains(character)) {
                 System.out.print(character);
             } else {
-                System.out.print('_');
+                System.out.print(this.messages.getMessage("game.message.omissionsSymbol"));
             }
             System.out.print(" ");
         }
