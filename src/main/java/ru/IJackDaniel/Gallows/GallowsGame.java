@@ -68,10 +68,12 @@ public class GallowsGame {
 
     }
 
+    // Вынес бы в отдельный утилитарный класс
     private boolean checkWin(String word, List<Character> userInput) {
         return countCollision(word, userInput) == word.length();
     }
 
+    // Вынес бы в отдельный утилитарный класс
     private int countCollision(String word, List<Character> userInput) {
         int collision = 0;
         for (Character character : word.toCharArray()) {
