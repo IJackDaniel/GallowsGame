@@ -2,6 +2,7 @@ package ru.IJackDaniel.Gallows;
 
 import ru.IJackDaniel.Gallows.service.WordsFromFileReader;
 import ru.IJackDaniel.Gallows.util.DictionaryUtil;
+import ru.IJackDaniel.Gallows.util.GameLogic;
 import ru.IJackDaniel.Gallows.view.View;
 import ru.IJackDaniel.Gallows.model.Dictionary;
 
@@ -13,14 +14,17 @@ public class GallowsGame {
     private final int COUNT_ATTEMPTS = 7;
 
     private final DictionaryUtil dictionaryUtil;
+    private final GameLogic gameLogic;
     private final View gallowsView;
 
-    public GallowsGame(String filePath) {
-        gallowsView = new View();
 
+    public GallowsGame(String filePath) {
         WordsFromFileReader reader = WordsFromFileReader.getInstance();
         Dictionary words = new Dictionary(reader.readWords(filePath));
         this.dictionaryUtil = new DictionaryUtil(words);
+
+        this.gallowsView = new View();
+        this.gameLogic = new GameLogic();
     }
 
 
@@ -39,8 +43,6 @@ public class GallowsGame {
         int countCollision = 0;
         List<Character> userInput = new ArrayList<>();
 
-        System.out.println("Отладочный вывод слова: " + guessedWord);
-
         do {
             gallowsView.printCountAttempts(countAttempts);
             gallowsView.showWordWithOmissions(guessedWord, userInput);
@@ -48,13 +50,13 @@ public class GallowsGame {
             Character inputCharacter = gallowsView.getUserInput();
             userInput.add(inputCharacter);
 
-            int currentCollision = countCollision(guessedWord, userInput);
+            int currentCollision = this.gameLogic.countCollision(guessedWord, userInput);
 
             if (currentCollision <= countCollision) {
                 countAttempts--;
             }
             countCollision = currentCollision;
-            if (this.checkWin(guessedWord, userInput)) {
+            if (this.gameLogic.checkWin(guessedWord, userInput)) {
                 isGameFinish = true;
                 isGuessed = true;
             }
@@ -66,21 +68,5 @@ public class GallowsGame {
 
         gallowsView.printGameResult(isGuessed, guessedWord);
 
-    }
-
-    // Вынес бы в отдельный утилитарный класс
-    private boolean checkWin(String word, List<Character> userInput) {
-        return countCollision(word, userInput) == word.length();
-    }
-
-    // Вынес бы в отдельный утилитарный класс
-    private int countCollision(String word, List<Character> userInput) {
-        int collision = 0;
-        for (Character character : word.toCharArray()) {
-            if (userInput.contains(character)) {
-                collision++;
-            }
-        }
-        return collision;
     }
 }
