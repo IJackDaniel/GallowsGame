@@ -42,9 +42,12 @@ public class View {
     public void printCountAttempts(int countAttempts) {
         System.out.println(this.messages.getMessage("game.message.countAttempts") + countAttempts);
         // Код для вывода виселицы. Как позитивно)
+        String key = "game.message.gallows.attemptsLeft" + countAttempts;
+        System.out.println(this.messages.getMessage(key));
     }
 
     public void showWordWithOmissions(String guessedWord, List<Character> userInput) {
+        System.out.print(this.messages.getMessage("game.message.showWord"));
         for (char character : guessedWord.toCharArray()) {
             if (userInput.contains(character)) {
                 System.out.print(character);

@@ -10,7 +10,7 @@ import java.util.List;
 
 public class GallowsGame {
 
-    private final int COUNT_ATTEMPTS = 10;
+    private final int COUNT_ATTEMPTS = 7;
 
     private final DictionaryUtil dictionaryUtil;
     private final View gallowsView;
