@@ -12,7 +12,6 @@ public class GallowsGame {
 
     private final int COUNT_ATTEMPTS = 10;
 
-    private final Dictionary words;
     private final DictionaryUtil dictionaryUtil;
     private final View gallowsView;
 
@@ -20,8 +19,8 @@ public class GallowsGame {
         gallowsView = new View();
 
         WordsFromFileReader reader = WordsFromFileReader.getInstance();
-        this.words = new Dictionary(reader.readWords(filePath));
-        this.dictionaryUtil = new DictionaryUtil(this.words);
+        Dictionary words = new Dictionary(reader.readWords(filePath));
+        this.dictionaryUtil = new DictionaryUtil(words);
     }
 
 
